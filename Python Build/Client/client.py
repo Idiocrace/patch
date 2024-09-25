@@ -11,13 +11,14 @@ PORT = int(input('Chatroom Port: '))
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     username_selected = False
-    while not username_selected:
-      username = input("Enter your username: ")
-      s.sendall(f'[αΣ¤Θ]{username}'.encode('utf-8'))
+    username_ = input('Username: ')
+    s.sendall(f'[αΣ¤Θ]{username_}')
+    while True:
       if s.recv(1024).decode('utf-8') == '[µσαΣ]':
-        print('Name already taken! Please pick another name')
-        continue
-      username_selected = True
+          print('Name already taken! Please pick another name')
+          continue
+      elif s.recv(1024).decode('utf-8') == '[αδπß]':
+          break
     print(f"Connected to server!")
 
     def receive_messages():
